@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NODE_HOME = tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-        PATH = "${NODE_HOME}/bin:${env.PATH}"
+        PATH = "${NODE_HOME}\\bin;${env.PATH}"
     }
 
     stages {
@@ -15,13 +15,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
@@ -34,7 +34,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Starting Node app...'
-                sh 'nohup npm start &'
+                // Start Node.js app in background
+                bat 'start /B cmd /c "npm start"'
             }
         }
     }
