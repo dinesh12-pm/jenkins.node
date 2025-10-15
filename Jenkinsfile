@@ -4,23 +4,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/dinesh12-pm/jenkins.node.git'
+                git branch: 'main', url: 'https://github.com/dinesh12-pm/jenkins.node.git
             }
         }
 
-        stage('Build') {
+        stage('Compile') {
             steps {
-                echo 'No build needed for static site.'
+                echo 'Compiling Java project...'
+                bat 'javac src\\Main.java -d bin'
             }
         }
 
-        stage('Deploy') {
+        stage('Run') {
             steps {
-                echo 'Deploying static site...'
-                // Copy files to a folder or start a simple Windows web server
-                bat 'mkdir C:\\JenkinsStaticDemo'
-                bat 'xcopy /E /Y * C:\\JenkinsStaticDemo'
-                echo 'Static site deployed to C:\\JenkinsStaticDemo'
+                echo 'Running Java project...'
+                bat 'java -cp bin Main'
             }
         }
     }
