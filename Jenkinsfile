@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_HOME = tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-        PATH = "${NODE_HOME}\\bin;${env.PATH}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -34,8 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Starting Node app...'
-                // Start Node.js app in background
-                bat 'start /B cmd /c "npm start"'
+                bat 'start /B cmd /c "node app.js"'
             }
         }
     }
