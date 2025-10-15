@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/dinesh12-pm/jenkins.node.git
+                git branch: 'main', url: 'https://github.com/dinesh12-pm/jenkins.node.git'
             }
         }
 
