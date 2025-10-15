@@ -4,32 +4,23 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/dinesh12-pm/jenkins.node.git'
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                bat 'npm install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                bat 'npm test'
+                git branch: 'main', url: 'https://github.com/dinesh12-pm/jenkins.node.git
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building project...'
+                echo 'No build needed for static site.'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Starting Node app...'
-                bat 'start /B cmd /c "node app.js"'
+                echo 'Deploying static site...'
+                // Copy files to a folder or start a simple Windows web server
+                bat 'mkdir C:\\JenkinsStaticDemo'
+                bat 'xcopy /E /Y * C:\\JenkinsStaticDemo'
+                echo 'Static site deployed to C:\\JenkinsStaticDemo'
             }
         }
     }
